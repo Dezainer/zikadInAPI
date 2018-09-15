@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import portfolio from './portfolio'
 
 const user = new mongoose.Schema({
 	name: {
@@ -15,17 +16,22 @@ const user = new mongoose.Schema({
 	},
 	points: {
 		type: Number,
-		reuired: true
+		required: true
 	},
-	skills: [String],
+	skills: {
+		type: [String]
+	},
 	location: {
 		type: String,
 		required: true
+	},
+	portfolio: {
+		type: [portfolio]
+	},
+	rank: {
+		type: String,
+		required: true
 	}
-})
-
-User.pre('find', function() {
-	this.rank = 'Fogueteiro'
 })
 
 export default mongoose.model('User', user)
