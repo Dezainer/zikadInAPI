@@ -13,6 +13,9 @@ export default (app) => {
 		.get(UserController.getById)
 		.put(UserController.update)
 
-	app.route('/post/:type')
+	app.route('/posts')
+		.get(PostController.get)
+
+	app.route('/posts/:type')
 		.post(PostController.create)
 }

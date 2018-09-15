@@ -1,5 +1,18 @@
+import LinkedPost from '../models/linkedPost'
+
 import PostHelper from '../helpers/postHelper'
 import ResponseHelper from '../helpers/responseHelper'
+
+const get = (req, res) => {
+	LinkedPost.find()
+		.populate('userId')
+		.populate('linkedUserId')
+		.exec((err, posts) => {
+			err
+				? ResponseHelper.handleError(res, err, 'Something went wrong!')
+				: res.send(posts)
+		})
+}
 
 const create = (req, res) => {
 	let Schema = PostHelper.getPostSchema(req.params.type),
@@ -17,4 +30,4 @@ const getPostWithType = (post, type) => {
 	return post
 }
 
-export default { create }
+export default { get, create }
